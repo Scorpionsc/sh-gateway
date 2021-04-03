@@ -4,7 +4,7 @@ import { UserController } from './controller/user-controller';
 
 dotenv.config();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 const app = createExpressServer({
   controllers: [UserController]
