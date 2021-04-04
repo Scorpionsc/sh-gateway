@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,25 +7,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-exports.__esModule = true;
-exports.HomeController = void 0;
-var routing_controllers_1 = require("routing-controllers");
-var HomeController = /** @class */ (function () {
-    function HomeController() {
+import { Controller, Get } from 'routing-controllers';
+import SugarCollector from '../services/SugarCollectorData.js';
+let HomeController = class HomeController {
+    get() {
+        const test = async () => {
+            const sugarCollector = SugarCollector.instance;
+            const lastEntry = await sugarCollector.getLastEntry();
+            const loopData = await sugarCollector.getLoopData();
+            return {
+                lastEntry,
+                loopData
+            };
+        };
+        return test();
     }
-    HomeController.prototype.get = function () {
-        return 'API works';
-    };
-    __decorate([
-        routing_controllers_1.Get('/'),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], HomeController.prototype, "get");
-    HomeController = __decorate([
-        routing_controllers_1.Controller()
-    ], HomeController);
-    return HomeController;
-}());
-exports.HomeController = HomeController;
+};
+__decorate([
+    Get('/'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "get", null);
+HomeController = __decorate([
+    Controller()
+], HomeController);
+export { HomeController };
 //# sourceMappingURL=home-controller.js.map
