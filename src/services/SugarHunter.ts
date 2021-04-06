@@ -69,6 +69,7 @@ class SugarHunter {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
+
     let result = 0;
 
     try {
