@@ -8,29 +8,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Controller, Get } from 'routing-controllers';
-import SugarCollector from '../services/SugarCollector.js';
-let SugarCollectorController = class SugarCollectorController {
-    get() {
+import SugarHunter from '../services/SugarHunter.js';
+let GetFoodController = class GetFoodController {
+    getFood() {
         const test = async () => {
-            const sugarCollector = SugarCollector.instance;
-            const lastEntry = await sugarCollector.getLastEntry();
-            const loopData = await sugarCollector.getLoopData();
+            const sugarHunter = SugarHunter.instance;
+            const products = await sugarHunter.getProducts();
+            const dishes = await sugarHunter.getDishes();
             return {
-                lastEntry,
-                loopData
+                products,
+                dishes
             };
         };
         return test();
     }
 };
 __decorate([
-    Get('/sugar-collector'),
+    Get('/food'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], SugarCollectorController.prototype, "get", null);
-SugarCollectorController = __decorate([
+], GetFoodController.prototype, "getFood", null);
+GetFoodController = __decorate([
     Controller()
-], SugarCollectorController);
-export { SugarCollectorController };
-//# sourceMappingURL=sugar-colector-controller.js.map
+], GetFoodController);
+export { GetFoodController };
+//# sourceMappingURL=get-food-controller.js.map

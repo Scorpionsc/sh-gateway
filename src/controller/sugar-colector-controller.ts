@@ -1,5 +1,5 @@
 import { Controller, Get } from 'routing-controllers';
-import SugarCollector from '../services/SugarCollectorData.js';
+import SugarCollector from '../services/SugarCollector.js';
 
 @Controller()
 export class SugarCollectorController {

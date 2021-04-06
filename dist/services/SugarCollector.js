@@ -65,4 +65,4 @@ class SugarCollector {
     }
 }
 export default SugarCollector;
-//# sourceMappingURL=SugarCollectorData.js.map
+//# sourceMappingURL=SugarCollector.js.map
