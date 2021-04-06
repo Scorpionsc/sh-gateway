@@ -2,19 +2,13 @@ import { Controller, Get } from 'routing-controllers';
 import SugarHunter from '../services/SugarHunter.js';
 
 @Controller()
-export class GetFoodController {
-    @Get('/food')
+export class GetDishesController {
+    @Get('/dishes')
   getFood () {
     const test = async () => {
       const sugarHunter = SugarHunter.instance;
 
-      const products = await sugarHunter.getProducts();
-      const dishes = await sugarHunter.getDishes();
-
-      return {
-        products,
-        dishes
-      };
+      return await sugarHunter.getDishes();
     };
 
     return test();
