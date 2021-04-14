@@ -40,6 +40,63 @@ class SugarHunter {
             }
             return result;
         };
+        this.createProduct = async (newProduct) => {
+            const client = new MongoClient(process.env.MONGODB_SH_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            let result = 0;
+            console.log(888);
+            try {
+                await client.connect();
+                const db = client.db('sh');
+                const products = db.collection('products');
+                const res = await products.insertOne(newProduct);
+                result = res.insertedCount;
+            }
+            finally {
+                await client.close();
+            }
+            console.log(666);
+            return result === 1;
+        };
+        this.createDish = async (newDish) => {
+            const client = new MongoClient(process.env.MONGODB_SH_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            let result = 0;
+            try {
+                await client.connect();
+                const db = client.db('sh');
+                const dishes = db.collection('dishes');
+                const res = await dishes.insertOne(newDish);
+                result = res.insertedCount;
+            }
+            finally {
+                await client.close();
+            }
+            return result === 1;
+        };
+        this.updateProduct = async (newProduct) => {
+            const { _id: id, ...newObj } = newProduct;
+            const client = new MongoClient(process.env.MONGODB_SH_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            let result = 0;
+            try {
+                await client.connect();
+                const db = client.db('sh');
+                const products = db.collection('products');
+                const res = await products.replaceOne({ _id: id }, newObj);
+                result = res.modifiedCount;
+            }
+            finally {
+                await client.close();
+            }
+            return result === 1;
+        };
         this.updateDish = async (newDish) => {
             const { _id: id, ...newObj } = newDish;
             const client = new MongoClient(process.env.MONGODB_SH_URI, {
@@ -53,6 +110,24 @@ class SugarHunter {
                 const dishes = db.collection('dishes');
                 const res = await dishes.replaceOne({ _id: id }, newObj);
                 result = res.modifiedCount;
+            }
+            finally {
+                await client.close();
+            }
+            return result === 1;
+        };
+        this.deleteProduct = async (id) => {
+            const client = new MongoClient(process.env.MONGODB_SH_URI, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            let result = 0;
+            try {
+                await client.connect();
+                const db = client.db('sh');
+                const products = db.collection('products');
+                const res = await products.deleteOne({ _id: id });
+                result = res.deletedCount;
             }
             finally {
                 await client.close();

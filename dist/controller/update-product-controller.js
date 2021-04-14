@@ -7,30 +7,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Controller, Get } from 'routing-controllers';
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+import 'reflect-metadata';
+import { Body, Controller, Put } from 'routing-controllers';
 import SugarHunter from '../services/SugarHunter.js';
-let GetFoodController = class GetFoodController {
-    getFood() {
-        const test = async () => {
+let UpdateProductController = class UpdateProductController {
+    save(body) {
+        const send = async () => {
             const sugarHunter = SugarHunter.instance;
-            const products = await sugarHunter.getProducts();
-            const dishes = await sugarHunter.getDishes();
-            return {
-                products,
-                dishes
-            };
+            return await sugarHunter.updateProduct(body);
         };
-        return test();
+        return send();
     }
 };
 __decorate([
-    Get('/food'),
+    Put('/update-product'),
+    __param(0, Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], GetFoodController.prototype, "getFood", null);
-GetFoodController = __decorate([
+], UpdateProductController.prototype, "save", null);
+UpdateProductController = __decorate([
     Controller()
-], GetFoodController);
-export { GetFoodController };
-//# sourceMappingURL=get-food-controller.js.map
+], UpdateProductController);
+export { UpdateProductController };
+//# sourceMappingURL=update-product-controller.js.map
