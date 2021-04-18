@@ -14,7 +14,7 @@ import { DeleteDishController } from './controller/delete-dish-controller.js';
 dotenv.config();
 
 const port = process.env.PORT;
-// const app = express();
+
 const app = createExpressServer({
   controllers: [
     SugarCollectorController,
