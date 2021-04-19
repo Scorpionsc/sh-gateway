@@ -17,8 +17,8 @@ class SugarCollector {
                 const items = await deviceStatus.find().sort({ $natural: -1 }).limit(1);
                 const status = await items.toArray();
                 result = {
-                    cob: status[0].loop.cob,
-                    iob: status[0].loop.iob
+                    cob: status[0].loop.cob || { cob: 0, timestamp: new Date(Date.now()).toUTCString() },
+                    iob: status[0].loop.iob || { iob: 0, timestamp: new Date(Date.now()).toUTCString() }
                 };
             }
             finally {
